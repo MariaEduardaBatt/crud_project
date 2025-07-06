@@ -2,46 +2,47 @@
 session_start();
 
 // Se já estiver logado, redireciona para a página principal
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: produtos.php');
+if (isset($_SESSION["usuario_id"])) {
+    header("Location: ../produtos/produtos.php");
     exit;
 }
 
-include 'config.php';
+include "../config.php";
 
-$erro = '';
-$sucesso = '';
+$erro = "";
+$sucesso = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nome = mysqli_real_escape_string($conexao, $_POST['nome']);
-    $email = mysqli_real_escape_string($conexao, $_POST['email']);
-    $senha = $_POST['senha'];
-    $confirmar_senha = $_POST['confirmar_senha'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = mysqli_real_escape_string($conexao, $_POST["nome"]);
+    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+    $senha = $_POST["senha"];
+    $confirmar_senha = $_POST["confirmar_senha"];
     
     if (!empty($nome) && !empty($email) && !empty($senha) && !empty($confirmar_senha)) {
         if ($senha === $confirmar_senha) {
             // Verificar se o email já existe
-            $sql_verificar = "SELECT id FROM usuarios WHERE email = '$email'";
+           $sql_verificar = "SELECT id FROM usuarios WHERE email = '".$email."'";
             $resultado_verificar = $conexao->query($sql_verificar);
             
             if ($resultado_verificar->num_rows == 0) {
                 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
                 
-                $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha_hash')";
+                $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('".$nome."', '".$email."', '".$senha_hash."')";
+
                 
                 if ($conexao->query($sql)) {
-                    $sucesso = 'Usuário registrado com sucesso! <a href="login.php">Faça login aqui</a>';
+                    $sucesso = "Usuário registrado com sucesso! <a href=\"login.php\">Faça login aqui</a>";
                 } else {
-                    $erro = 'Erro ao registrar usuário: ' . $conexao->error;
+                    $erro = "Erro ao registrar usuário: " . $conexao->error;
                 }
             } else {
-                $erro = 'Este email já está cadastrado.';
+                $erro = "Este email já está cadastrado.";
             }
         } else {
-            $erro = 'As senhas não coincidem.';
+            $erro = "As senhas não coincidem.";
         }
     } else {
-        $erro = 'Por favor, preencha todos os campos.';
+        $erro = "Por favor, preencha todos os campos.";
     }
 }
 ?>
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Sistema CRUD</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container">

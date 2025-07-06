@@ -1,6 +1,6 @@
 <?php
 // Página inicial - redireciona para login
-header('Location: login.php');
+header("Location: includes/login.php");
 exit;
 ?>
 

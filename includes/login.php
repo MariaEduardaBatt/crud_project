@@ -2,39 +2,39 @@
 session_start();
 
 // Se já estiver logado, redireciona para a página principal
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: produtos.php');
+if (isset($_SESSION["usuario_id"])) {
+    header("Location: ../produtos/produtos.php");
     exit;
 }
 
-include 'config.php';
+include "../config.php";
 
-$erro = '';
+$erro = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = mysqli_real_escape_string($conexao, $_POST['email']);
-    $senha = $_POST['senha'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = mysqli_real_escape_string($conexao, $_POST["email"]);
+    $senha = $_POST["senha"];
     
     if (!empty($email) && !empty($senha)) {
-        $sql = "SELECT id, nome, senha FROM usuarios WHERE email = '$email'";
+        $sql = "SELECT id, nome, senha FROM usuarios WHERE email = '".$email."'";
         $resultado = $conexao->query($sql);
         
         if ($resultado->num_rows == 1) {
             $usuario = $resultado->fetch_assoc();
             
-            if (password_verify($senha, $usuario['senha'])) {
-                $_SESSION['usuario_id'] = $usuario['id'];
-                $_SESSION['usuario_nome'] = $usuario['nome'];
-                header('Location: produtos.php');
+            if (password_verify($senha, $usuario["senha"])) {
+                $_SESSION["usuario_id"] = $usuario["id"];
+                $_SESSION["usuario_nome"] = $usuario["nome"];
+                header("Location: ../produtos/produtos.php");
                 exit;
             } else {
-                $erro = 'Email ou senha incorretos.';
+                $erro = "Email ou senha incorretos.";
             }
         } else {
-            $erro = 'Email ou senha incorretos.';
+            $erro = "Email ou senha incorretos.";
         }
     } else {
-        $erro = 'Por favor, preencha todos os campos.';
+        $erro = "Por favor, preencha todos os campos.";
     }
 }
 ?>
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema CRUD</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <div class="container">

@@ -3,7 +3,7 @@
 $host = 'localhost';
 $database = 'crud_db';
 $username = 'root';
-$password = '';
+$password = ''; // Senha definida para o usuário root do MySQL
 
 // Conexão com o banco de dados
 $conexao = new mysqli($host, $username, $password, $database);

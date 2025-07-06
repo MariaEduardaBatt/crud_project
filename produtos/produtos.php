@@ -1,18 +1,18 @@
 <?php
 session_start();
-include 'verificar_login.php';
-include 'config.php';
+include "../includes/verificar_login.php";
+include "../config.php";
 
 // Busca por nome de produto
-$busca = '';
-if (isset($_GET['busca'])) {
-    $busca = mysqli_real_escape_string($conexao, $_GET['busca']);
+$busca = "";
+if (isset($_GET["busca"])) {
+    $busca = mysqli_real_escape_string($conexao, $_GET["busca"]);
 }
 
 // Query para listar produtos (ordenados do mais novo para o mais antigo)
 $sql = "SELECT * FROM produtos";
 if (!empty($busca)) {
-    $sql .= " WHERE nome LIKE '%$busca%'";
+   $sql .= " WHERE nome LIKE '%$busca%'";
 }
 $sql .= " ORDER BY data_criacao DESC";
 
@@ -25,15 +25,16 @@ $resultado = $conexao->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Sistema CRUD</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/confirm_delete.js"></script>
 </head>
 <body>
     <div class="container">
         <header class="header">
             <h1>Sistema de Produtos</h1>
             <div class="user-info">
-                Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!
-                <a href="logout.php" class="btn btn-secondary">Sair</a>
+                Bem-vindo, <?php echo $_SESSION["usuario_nome"]; ?>!
+                <a href="../includes/logout.php" class="btn btn-secondary">Sair</a>
             </div>
         </header>
         
@@ -56,27 +57,28 @@ $resultado = $conexao->query($sql);
                     <?php while ($produto = $resultado->fetch_assoc()): ?>
                         <div class="produto-card">
                             <div class="produto-imagem">
-                                <?php if (!empty($produto['imagem']) && file_exists('produtos/imagens/' . $produto['imagem'])): ?>
-                                    <img src="produtos/imagens/<?php echo $produto['imagem']; ?>" 
-                                         alt="<?php echo htmlspecialchars($produto['nome']); ?>">
+                                <?php if (!empty($produto["imagem"]) && file_exists("../imagens/" . $produto["imagem"])):
+                                    ?>
+                                    <img src="../imagens/<?php echo $produto["imagem"]; ?>" 
+                                         alt="<?php echo htmlspecialchars($produto["nome"]); ?>">
                                 <?php else: ?>
                                     <div class="sem-imagem">Sem imagem</div>
                                 <?php endif; ?>
                             </div>
                             
                             <div class="produto-info">
-                                <h3><?php echo htmlspecialchars($produto['nome']); ?></h3>
-                                <p class="preco">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
-                                <p class="quantidade">Quantidade: <?php echo $produto['quantidade']; ?></p>
-                                <p class="descricao"><?php echo htmlspecialchars($produto['descricao']); ?></p>
-                                <p class="data">Cadastrado em: <?php echo date('d/m/Y H:i', strtotime($produto['data_criacao'])); ?></p>
+                                <h3><?php echo htmlspecialchars($produto["nome"]); ?></h3>
+                                <p class="preco">R$ <?php echo number_format($produto["preco"], 2, ",", "."); ?></p>
+                                <p class="quantidade">Quantidade: <?php echo $produto["quantidade"]; ?></p>
+                                <p class="descricao"><?php echo htmlspecialchars($produto["descricao"]); ?></p>
+                                <p class="data">Cadastrado em: <?php echo date("d/m/Y H:i", strtotime($produto["data_criacao"])); ?></p>
                                 
                                 <div class="produto-acoes">
-                                    <a href="editar_produto.php?id=<?php echo $produto['id']; ?>" 
+                                    <a href="editar_produto.php?id=<?php echo $produto["id"]; ?>" 
                                        class="btn btn-edit">Editar</a>
-                                    <a href="excluir_produto.php?id=<?php echo $produto['id']; ?>" 
+                                    <a href="excluir_produto.php?id=<?php echo $produto["id"]; ?>" 
                                        class="btn btn-delete"
-                                       onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
+                                       onclick="return confirmDelete()">Excluir</a>
                                 </div>
                             </div>
                         </div>
