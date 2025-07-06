@@ -20,5 +20,7 @@ OBSERVAÇÕES:
 - Interface responsiva e moderna
 - Todas as funcionalidades testadas e validadas
 - Comandos SQL para criação das tabelas dentro do repositorio 
+- Arquivo nomeado como "Config.php" deve ser alterado para as credenciais do usuario
+
 
 
