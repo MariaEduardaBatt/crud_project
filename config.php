@@ -1,9 +1,9 @@
 <?php
 // Configurações do banco de dados
-$host = 'localhost';
-$database = 'crud_db';
-$username = 'root';
-$password = ''; // Senha definida para o usuário root do MySQL
+$host = 'sql313.infinityfree.com';
+$database = 'if0_39406156_db_crud';
+$username = 'if0_39406156';
+$password = 'senhaInfinity22'; 
 
 // Conexão com o banco de dados
 $conexao = new mysqli($host, $username, $password, $database);
@@ -16,4 +16,3 @@ if ($conexao->connect_error) {
 // Configurar charset
 $conexao->set_charset("utf8");
 ?>
-
