@@ -1,9 +1,9 @@
 <?php
 // Configurações do banco de dados
-$host = 'sql313.infinityfree.com';
-$database = 'if0_39406156_db_crud';
-$username = 'if0_39406156';
-$password = 'senhaInfinity22'; 
+$host = 'localhost'; // Endereço do servidor MySQL
+$database = 'crud_db';
+$username = 'root';
+$password = ''; 
 
 // Conexão com o banco de dados
 $conexao = new mysqli($host, $username, $password, $database);

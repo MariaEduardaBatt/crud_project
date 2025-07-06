@@ -57,9 +57,9 @@ $resultado = $conexao->query($sql);
                     <?php while ($produto = $resultado->fetch_assoc()): ?>
                         <div class="produto-card">
                             <div class="produto-imagem">
-                                <?php if (!empty($produto["imagem"]) && file_exists("../imagens/" . $produto["imagem"])):
+                                <?php if (!empty($produto["imagem"]) && file_exists("./imagens/" . $produto["imagem"])):
                                     ?>
-                                    <img src="../imagens/<?php echo $produto["imagem"]; ?>" 
+                                    <img src="./imagens/<?php echo $produto["imagem"]; ?>" 
                                          alt="<?php echo htmlspecialchars($produto["nome"]); ?>">
                                 <?php else: ?>
                                     <div class="sem-imagem">Sem imagem</div>

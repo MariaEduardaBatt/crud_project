@@ -27,8 +27,8 @@ $sql_delete = "DELETE FROM produtos WHERE id = ".$produto_id."";
 
 if ($conexao->query($sql_delete)) {
     // Remover a imagem do servidor se existir
-    if (!empty($produto["imagem"]) && file_exists("../imagens/" . $produto["imagem"])) {
-        unlink("../imagens/" . $produto["imagem"]);
+    if (!empty($produto["imagem"]) && file_exists("./imagens/" . $produto["imagem"])) {
+        unlink("./imagens/" . $produto["imagem"]);
     }
     
     // Redirecionar com mensagem de sucesso

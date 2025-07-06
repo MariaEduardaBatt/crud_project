@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (in_array($extensao, $extensoes_permitidas)) {
                 if ($arquivo["size"] <= 2 * 1024 * 1024) { // 2MB
                     $nome_imagem = uniqid() . "." . $extensao;
-                    $caminho_destino = "../imagens/" . $nome_imagem;
+                    $caminho_destino = "./imagens/" . $nome_imagem;
                     
                     if (!move_uploaded_file($arquivo["tmp_name"], $caminho_destino)) {
                         $erro = "Erro ao fazer upload da imagem.";

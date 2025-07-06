@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     
                     $nome_imagem = uniqid() . "." . $extensao;
-                    $caminho_destino = "../imagens/" . $nome_imagem;
+                    $caminho_destino = "./imagens/" . $nome_imagem;
                     
                     if (!move_uploaded_file($arquivo["tmp_name"], $caminho_destino)) {
                         $erro = "Erro ao fazer upload da imagem.";
@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php if (!empty($produto["imagem"]) && file_exists("../imagens/" . $produto["imagem"])):
                         ?>
                         <div class="imagem-atual">
-                            <img src="../imagens/<?php echo $produto["imagem"]; ?>" 
+                            <img src="./imagens/<?php echo $produto["imagem"]; ?>" 
                                  alt="<?php echo htmlspecialchars($produto["nome"]); ?>"
                                  style="max-width: 200px; max-height: 200px;">
                         </div>
