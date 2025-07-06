@@ -12,7 +12,7 @@ LINK DO PROJETO HOSPEDADO:
 https://gerenciamentodeprodutos.free.nf
 
 LINK DO VÍDEO DE APRESENTAÇÃO:
-[Inserir link do YouTube aqui]
+https://youtu.be/AOxgxjGV0S4
 
 OBSERVAÇÕES:
 - Projeto desenvolvido seguindo as especificações do trabalho
